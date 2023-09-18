@@ -4,10 +4,6 @@
 FROM nvidia/cuda:12.2.0-base-ubuntu22.04
 MAINTAINER Daryl Wilding-McBride
 
-# create some directories to work with
-RUN mkdir /project && mkdir /scratch && mkdir /dataset
-RUN mkdir /dataset/nnUNet_raw && mkdir /dataset/nnUNet_preprocessed && mkdir /dataset/nnUNet_results
-
 # install Ubuntu libraries and packages
 RUN apt-get update -y && \
 apt-get install git curl -y && \
@@ -31,7 +27,9 @@ RUN git clone https://github.com/MIC-DKFZ/nnUNet.git
 WORKDIR /home/nnUNet
 RUN pip install -e .
 
+WORKDIR /home
+
 # set environemnt variables for nnU-Net
-ENV nnUNet_raw="/dataset/nnUNet_raw"
-ENV nnUNet_preprocessed="/dataset/nnUNet_preprocessed"
-ENV nnUNet_results="/dataset/nnUNet_results"
+ENV nnUNet_raw=/datasets/brats/nnU-Net-processing/nnUNet_raw
+ENV nnUNet_preprocessed=/datasets/brats/nnU-Net-processing/nnUNet_preprocessed
+ENV nnUNet_results=/datasets/brats/nnU-Net-processing/nnUNet_results
