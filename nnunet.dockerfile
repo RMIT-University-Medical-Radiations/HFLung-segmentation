@@ -30,6 +30,14 @@ RUN pip install -e .
 WORKDIR /home
 
 # set environemnt variables for nnU-Net
-ENV nnUNet_raw=/datasets/brats/nnU-Net-processing/nnUNet_raw
-ENV nnUNet_preprocessed=/datasets/brats/nnU-Net-processing/nnUNet_preprocessed
-ENV nnUNet_results=/datasets/brats/nnU-Net-processing/nnUNet_results
+ENV nnUNet_raw=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw
+ENV nnUNet_preprocessed=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_preprocessed
+ENV nnUNet_results=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_results
+
+# train the model with 5-fold cross-validation
+CMD nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity > /datasets/RNSH_HFlung/planning.out && \
+    nnUNetv2_train 138 3d_fullres 0 -device cuda > /datasets/RNSH_HFlung/fold_0.out && \
+    nnUNetv2_train 138 3d_fullres 1 -device cuda > /datasets/RNSH_HFlung/fold_1.out && \
+    nnUNetv2_train 138 3d_fullres 2 -device cuda > /datasets/RNSH_HFlung/fold_2.out && \
+    nnUNetv2_train 138 3d_fullres 3 -device cuda > /datasets/RNSH_HFlung/fold_3.out && \
+    nnUNetv2_train 138 3d_fullres 4 -device cuda > /datasets/RNSH_HFlung/fold_4.out
