@@ -29,7 +29,7 @@ RUN pip install -e .
 
 WORKDIR /home
 
-# set environemnt variables for nnU-Net
+# set environment variables for nnU-Net
 ENV nnUNet_raw=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw
 ENV nnUNet_preprocessed=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_preprocessed
 ENV nnUNet_results=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_results
