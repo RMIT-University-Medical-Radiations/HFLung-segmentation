@@ -21,15 +21,20 @@ training_label_dir = '{}/{}'.format(out_base_dir, "labelsTr")
 test_image_dir = '{}/{}'.format(out_base_dir, "imagesTs")
 test_label_dir = '{}/{}'.format(out_base_dir, "labelsTs")
 
-if not os.path.exists(training_image_dir):
-    os.makedirs(training_image_dir)
-if not os.path.exists(training_label_dir):
-    os.makedirs(training_label_dir)
+if os.path.exists(training_image_dir):
+    shutil.rmtree(training_image_dir)
+if os.path.exists(training_label_dir):
+    shutil.rmtree(training_label_dir)
 
-if not os.path.exists(test_image_dir):
-    os.makedirs(test_image_dir)
-if not os.path.exists(test_label_dir):
-    os.makedirs(test_label_dir)
+if os.path.exists(test_image_dir):
+    shutil.rmtree(test_image_dir)
+if os.path.exists(test_label_dir):
+    shutil.rmtree(test_label_dir)
+
+os.makedirs(training_image_dir)
+os.makedirs(training_label_dir)
+os.makedirs(test_image_dir)
+os.makedirs(test_label_dir)
 
 path = '{}/Patient*.npy'.format(data_dir)
 file_l = sorted(glob.glob(path))
