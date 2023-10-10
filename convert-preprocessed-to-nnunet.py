@@ -26,12 +26,19 @@ if not os.path.exists(training_image_dir):
 if not os.path.exists(training_label_dir):
     os.makedirs(training_label_dir)
 
+if not os.path.exists(test_image_dir):
+    os.makedirs(test_image_dir)
+if not os.path.exists(test_label_dir):
+    os.makedirs(test_label_dir)
+
 path = '{}/Patient*.npy'.format(data_dir)
 file_l = sorted(glob.glob(path))
 test_file_l = random.sample(file_l, number_of_test_patients)
 training_file_l = list(set(file_l) - set(test_file_l))
 
+print('processing training set')
 for c,f in enumerate(training_file_l):
+    print(f)
     # split the patient file contents into channels
     patient_arr = np.load(f)
     patient_arr = np.moveaxis(patient_arr, 1, -1)  # move the z-axis to be last
@@ -49,7 +56,9 @@ for c,f in enumerate(training_file_l):
     # 1-channel labels
     label_img.to_filename('{}/{}.nii.gz'.format(training_label_dir, case_id_str))
 
+print('processing test set')
 for c,f in enumerate(test_file_l):
+    print(f)
     # split the patient file contents into channels
     patient_arr = np.load(f)
     patient_arr = np.moveaxis(patient_arr, 1, -1)  # move the z-axis to be last
