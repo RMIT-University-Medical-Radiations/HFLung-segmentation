@@ -4,6 +4,7 @@ import numpy as np
 import shutil
 import glob
 import random
+import json
 from nnunetv2.dataset_conversion.generate_dataset_json import generate_dataset_json
 
 nnUNet_raw='/home/daryl/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
@@ -41,6 +42,8 @@ file_l = sorted(glob.glob(path))
 test_file_l = random.sample(file_l, number_of_test_patients)
 training_file_l = list(set(file_l) - set(test_file_l))
 
+patient_map_d = {'training':[], 'test':[]}
+
 print('processing training set')
 for c,f in enumerate(training_file_l):
     print(f)
@@ -60,6 +63,8 @@ for c,f in enumerate(training_file_l):
     
     # 1-channel labels
     label_img.to_filename('{}/{}.nii.gz'.format(training_label_dir, case_id_str))
+
+    patient_map_d['training'].append([f,case_id_str])
 
 print('processing test set')
 for c,f in enumerate(test_file_l):
@@ -81,6 +86,9 @@ for c,f in enumerate(test_file_l):
     # 1-channel labels
     label_img.to_filename('{}/{}.nii.gz'.format(test_label_dir, case_id_str))
 
+    patient_map_d['test'].append([f,case_id_str])
+
+# write the dataset file
 generate_dataset_json(out_base_dir,
                       channel_names={0: 'exh_ct', 1: 'inh_ct'},
                       labels={
@@ -95,3 +103,7 @@ generate_dataset_json(out_base_dir,
                       license='',
                       reference='',
                       dataset_release='1.0')
+
+# write the patient ID mapping
+with open('patient-mapping.json', 'w') as fp:
+    json.dump(patient_map_d, fp)
