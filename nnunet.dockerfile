@@ -34,6 +34,9 @@ ENV nnUNet_raw=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw
 ENV nnUNet_preprocessed=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_preprocessed
 ENV nnUNet_results=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_results
 
+# set up the custom trainer
+RUN ln -s /HFLung-segmentation/nnUNetTrainerDA5_100epochs.py /home/nnUNet/nnunetv2/training/nnUNetTrainer
+
 # train the model with 5-fold cross-validation
 CMD 'nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_target 24 && \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 3d_fullres 0 -device cuda --npz; \
