@@ -1,5 +1,5 @@
 import torch
-from nnunetv2.training.nnUNetTrainer.variants.data_augmentation.nnUNetTrainerDA5 import nnUNetTrainerDA5
+from nnunetv2.training.nnUNetTrainer.variants.data_augmentation import nnUNetTrainerDA5
 
 
 class nnUNetTrainerDA5_100epochs(nnUNetTrainerDA5):
