@@ -35,7 +35,7 @@ ENV nnUNet_preprocessed=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_preproce
 ENV nnUNet_results=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_results
 
 # train the model with 5-fold cross-validation
-CMD nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_target 24 && \
+CMD 'nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_target 24 && \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 3d_fullres 0 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 3d_fullres 1 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 3d_fullres 2 -device cuda --npz; \
@@ -50,4 +50,4 @@ CMD nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_t
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 2d 1 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 2d 2 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_100epochs 138 2d 3 -device cuda --npz; \
-    nnUNetv2_train -tr nnUNetTrainer_100epochs 138 2d 4 -device cuda --npz
+    nnUNetv2_train -tr nnUNetTrainer_100epochs 138 2d 4 -device cuda --npz'
