@@ -39,7 +39,7 @@ RUN ln -s /HFLung-segmentation/nnUNetTrainerDA5_100epochs.py /home/nnUNet/nnunet
 RUN ln -s /HFLung-segmentation/nnUNetTrainerDA5_60epochs.py /home/nnUNet/nnunetv2/training/nnUNetTrainer
 
 # train the model with 5-fold cross-validation
-CMD 'nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_target 24 && \
+CMD nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_target 24 && \
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 3d_fullres 0 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 3d_fullres 1 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 3d_fullres 2 -device cuda --npz; \
@@ -54,7 +54,7 @@ CMD 'nnUNetv2_plan_and_preprocess -d 138 --verify_dataset_integrity -gpu_memory_
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 2d 1 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 2d 2 -device cuda --npz; \
     nnUNetv2_train -tr nnUNetTrainer_60epochs 138 2d 3 -device cuda --npz; \
-    nnUNetv2_train -tr nnUNetTrainer_60epochs 138 2d 4 -device cuda --npz'
+    nnUNetv2_train -tr nnUNetTrainer_60epochs 138 2d 4 -device cuda --npz
 
 # train the model with one fold
 # CMD nnUNetv2_train -tr nnUNetTrainer_100epochs 138 3d_fullres 0 -device cuda --npz
