@@ -11,7 +11,7 @@ rm -rf /var/lib/apt/lists/*
 
 # set the time zone
 RUN apt-get install -y tzdata
-ENV TZ Australia/Melbourne
+ENV TZ=Australia/Melbourne
 
 # set some environemnt variables
 ENV PATH="/home/miniconda3/bin:${PATH}"
