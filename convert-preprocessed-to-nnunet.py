@@ -39,7 +39,8 @@ os.makedirs(test_label_dir)
 
 path = '{}/Patient*.npy'.format(data_dir)
 file_l = sorted(glob.glob(path))
-test_file_l = random.sample(file_l, number_of_test_patients)
+# test_file_l = random.sample(file_l, number_of_test_patients)
+test_file_l = ["/home/daryl/datasets/RNSH_HFlung/training-set/Patient17.npy", "/home/daryl/datasets/RNSH_HFlung/training-set/Patient19.npy"]
 training_file_l = list(set(file_l) - set(test_file_l))
 
 patient_map_d = {'training':[], 'test':[]}
