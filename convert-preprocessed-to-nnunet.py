@@ -54,7 +54,7 @@ for c,f in enumerate(training_file_l):
     
     exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
     inh_img = nib.Nifti1Image(patient_arr[1], np.eye(4))
-    label_img = nib.Nifti1Image(patient_arr[3], np.eye(4))
+    label_img = nib.Nifti1Image(patient_arr[4], np.eye(4))
     
     case_id_str = '{}_{:04d}'.format(task_name, c)
     
@@ -76,7 +76,7 @@ for c,f in enumerate(test_file_l):
     
     exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
     inh_img = nib.Nifti1Image(patient_arr[1], np.eye(4))
-    label_img = nib.Nifti1Image(patient_arr[3], np.eye(4))
+    label_img = nib.Nifti1Image(patient_arr[4], np.eye(4))
     
     case_id_str = '{}_{:04d}'.format(task_name, c)
     
