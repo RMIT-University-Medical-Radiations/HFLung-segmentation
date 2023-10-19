@@ -10,8 +10,9 @@ apt-get install git curl -y && \
 rm -rf /var/lib/apt/lists/*
 
 # set the time zone
-RUN apt-get install -y tzdata
+ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Australia/Melbourne
+RUN apt-get install -y tzdata
 
 # set some environemnt variables
 ENV PATH="/home/miniconda3/bin:${PATH}"
