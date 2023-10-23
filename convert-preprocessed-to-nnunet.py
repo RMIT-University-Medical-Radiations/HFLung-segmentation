@@ -12,22 +12,18 @@ data_dir = '/home/daryl/datasets/RNSH_HFlung/training-set'
 task_id = 138
 task_name = "RNSH_HFlung"
 
-patient_ids = np.arange(1,20+1)
-number_of_test_sets = 5
-patient_test_sets = []  # seeded with an initial set
-number_of_test_patients = 2
-
-def choose_test_patients():
+def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_sets):
     result = []
-    while len(patient_test_sets) < number_of_test_sets:
+    while len(result) < number_of_test_sets:
         s = random.sample(list(patient_ids), number_of_test_patients)
-        if (s not in patient_test_sets) and (s[::-1] not in patient_test_sets):
-            patient_test_sets.append(s)
+        if (s not in result) and (s[::-1] not in result):
+            result.append(s)
         else:
             print('{} is already present'.format(s))
     return result
 
-patient_test_sets = choose_test_patients()
+patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
+print(patient_test_sets)
 for test_set_idx,test_set in enumerate(patient_test_sets):
     foldername = 'Dataset{:03d}_{}_{}'.format(task_id+test_set_idx, task_name, test_set_idx+1)
     print('experiment {}'.format(foldername))
