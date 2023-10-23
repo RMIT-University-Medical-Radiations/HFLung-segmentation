@@ -52,7 +52,7 @@ for test_set_idx,test_set in enumerate(patient_test_sets):
 
     path = '{}/Patient*.npy'.format(data_dir)
     file_l = sorted(glob.glob(path))
-    test_file_l = random.sample(file_l, number_of_test_patients)
+    test_file_l = [ file_l[i-1] for i in test_set ]
     training_file_l = list(set(file_l) - set(test_file_l))
 
     patient_map_d = {'training':[], 'test':[]}
