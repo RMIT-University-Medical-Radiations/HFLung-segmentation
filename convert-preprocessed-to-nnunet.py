@@ -9,7 +9,7 @@ from nnunetv2.dataset_conversion.generate_dataset_json import generate_dataset_j
 
 nnUNet_raw='/home/daryl/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
 data_dir = '/home/daryl/datasets/RNSH_HFlung/training-set'
-task_id = 138
+base_task_id = 140
 task_name = "RNSH_HFlung"
 
 def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_sets):
@@ -25,7 +25,7 @@ def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_se
 patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
 print(patient_test_sets)
 for test_set_idx,test_set in enumerate(patient_test_sets):
-    foldername = 'Dataset{:03d}_{}_{}'.format(task_id+test_set_idx, task_name, test_set_idx+1)
+    foldername = 'Dataset{:03d}_{}'.format(base_task_id+test_set_idx, task_name)
     print('experiment {}'.format(foldername))
 
     # setting up nnU-Net folders
@@ -118,5 +118,5 @@ for test_set_idx,test_set in enumerate(patient_test_sets):
                         dataset_release='1.0')
 
     # write the patient ID mapping
-    with open('patient-mapping-exp-{}.json'.format(test_set_idx+1), 'w') as fp:
+    with open('patient-mapping-{}.json'.format(foldername), 'w') as fp:
         json.dump(patient_map_d, fp)
