@@ -10,9 +10,9 @@ apt-get install git curl -y && \
 rm -rf /var/lib/apt/lists/*
 
 # set the time zone
-RUN apt-get update && apt-get install -y tzdata
 ENV TZ=Australia/Melbourne
 ENV DEBIAN_FRONTEND="noninteractive"
+RUN apt-get update && apt-get install -y tzdata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # set some environment variables
