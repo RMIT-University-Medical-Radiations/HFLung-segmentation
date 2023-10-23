@@ -26,7 +26,7 @@ patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_o
 print(patient_test_sets)
 for test_set_idx,test_set in enumerate(patient_test_sets):
     foldername = 'Dataset{:03d}_{}'.format(base_task_id+test_set_idx, task_name)
-    print('experiment {}'.format(foldername))
+    print('test set {}: {}'.format(test_set, foldername))
 
     # setting up nnU-Net folders
     out_base_dir = '{}/{}'.format(nnUNet_raw, foldername)
