@@ -10,10 +10,9 @@ apt-get install git curl -y && \
 rm -rf /var/lib/apt/lists/*
 
 # set the time zone
-# ARG DEBIAN_FRONTEND=noninteractive
-# ENV TZ=Australia/Melbourne
-# RUN apt-get install -y tzdata
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="Australia/Melbourne" apt-get install -y tzdata
+RUN apt-get update && apt-get install -y tzdata
+ENV TZ=Australia/Melbourne
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # set some environment variables
 ENV PATH="/home/miniconda3/bin:${PATH}"
