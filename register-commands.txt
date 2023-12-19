@@ -1,9 +1,9 @@
 # register command file for Plastimatch
 # produces a vector field vf.mha
 [GLOBAL]
-fixed=image_1.mha
-moving=image_2.mha
-img_out=warped_2.mha
+fixed=phase-1.mha
+moving=phase-2.mha
+img_out=warped-2.mha
 vf_out=vf.mha
 xform_out=bspline_coefficients.txt
 
