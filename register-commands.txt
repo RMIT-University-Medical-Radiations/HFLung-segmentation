@@ -19,6 +19,7 @@ threading=openmp
 grid_spac=312.5002      312.5002      287.9984
 res=32 32 32
 background_max=0.0
+default_value=0.0
 pgtol=0.0001
 
 [STAGE]
