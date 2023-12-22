@@ -6,6 +6,7 @@ fixed=phase-02.mha
 vf_out=dvf.mha
 img_out=deformed.mha
 fixed_mask=mask.mha
+xform_out=bspline_coefficients.txt
 
 [STAGE]
 xform=bspline
