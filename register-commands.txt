@@ -6,7 +6,7 @@ fixed=phase-02.mha
 vf_out=dvf.mha
 img_out=deformed.mha
 fixed_mask=mask.mha
-xform_out=bspline_coefficients.txt
+# xform_out=bspline_coefficients.txt
 
 [STAGE]
 xform=bspline
@@ -17,11 +17,9 @@ max_its=1000
 regularization=analytic
 regularization_lambda=1
 threading=openmp
-# grid_spac=312.5002      312.5002      287.9984
-grid_spac=156.2501      156.2501      143.9992
+grid_spac=312.5002      312.5002      287.9984
 res=32 32 32
-background_max=-0.1
-default_value=0.0
+background_max=-1000.000000
 pgtol=0.0001
 
 [STAGE]
