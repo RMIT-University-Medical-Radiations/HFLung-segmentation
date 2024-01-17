@@ -1,9 +1,9 @@
 # register command file for Plastimatch
 # produces a vector field dvf.mha
 [GLOBAL]
-fixed=phase-exhale.mha
-moving=phase-inhale.mha
-fixed_mask=mask-exhale.mha
+fixed=pet-filtered.mha
+moving=ctvi-jac-filtered.mha
+fixed_mask=mask.mha
 vf_out=dvf.mha
 img_out=deformed.mha
 # xform_out=bspline_coefficients.txt
