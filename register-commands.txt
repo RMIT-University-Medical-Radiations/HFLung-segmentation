@@ -3,9 +3,7 @@
 [GLOBAL]
 fixed=phase-exhale-nomask.mha
 moving=phase-inhale-nomask.mha
-# fixed=phase-exhale.mha
-# moving=phase-inhale.mha
-fixed_mask=mask-exhale.mha
+fixed_mask=mask-union.mha
 vf_out=dvf.mha
 img_out=deformed.mha
 # xform_out=bspline_coefficients.txt
