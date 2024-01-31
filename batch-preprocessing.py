@@ -25,6 +25,6 @@ for patient_id in range(1,NUMBER_OF_PATIENTS+1):
     pm.execute_notebook(
                         input_path=input_nb,
                         output_path=output_nb,
-                        parameters=dict(patient_id=patient_id)
+                        parameters=dict(patient_id=patient_id, noninteract=True)
                         )
     print('-------------\n')
