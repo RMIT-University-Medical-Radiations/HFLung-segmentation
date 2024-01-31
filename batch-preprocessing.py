@@ -4,7 +4,7 @@ import os
 from os.path import expanduser
 import shutil
 
-NB_INPUT_DIR = '{}/repos/HFLung-segmentation'.format(expanduser('~'))
+NB_INPUT_DIR = '{}/repos/CTVI-3D'.format(expanduser('~'))
 NB_OUTPUT_DIR = '{}/papermill-output/pre-processing'.format(expanduser('~'))
 NOTEBOOK_NAME = 'data pre-processing 3D plastimatch with post-DIR resampling'
 
