@@ -10,7 +10,8 @@ img_out=deformed.mha
 
 [STAGE]
 xform=bspline
-optim=lbfgsb
+# optim=lbfgsb
+optim=steepest
 impl=plastimatch
 metric=mse
 max_its=1000
