@@ -7,9 +7,9 @@ import random
 import json
 from nnunetv2.dataset_conversion.generate_dataset_json import generate_dataset_json
 
-nnUNet_raw='/home/daryl/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
-data_dir = '/home/daryl/datasets/RNSH_HFlung/training-set'
-base_task_id = 140
+preprocessed_dir = '/mnt/data/datasets/RNSH_HFlung/pre-processed-plastimatch/stack'
+nnUNet_raw='/mnt/data/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
+base_task_id = 150
 task_name = "RNSH_HFlung"
 
 def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_sets):
@@ -118,5 +118,5 @@ for test_set_idx,test_set in enumerate(patient_test_sets):
                         dataset_release='1.0')
 
     # write the patient ID mapping
-    with open('patient-mapping-{}.json'.format(foldername), 'w') as fp:
+    with open('{}/patient-mapping-{}.json'.format(nnUNet_raw, foldername), 'w') as fp:
         json.dump(patient_map_d, fp)
