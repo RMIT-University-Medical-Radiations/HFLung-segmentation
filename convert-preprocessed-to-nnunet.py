@@ -14,12 +14,13 @@ task_name = "RNSH_HFlung"
 
 def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_sets):
     result = []
+    available_ids = list(patient_ids)
     while len(result) < number_of_test_sets:
-        s = random.sample(list(patient_ids), number_of_test_patients)
-        if (s not in result) and (s[::-1] not in result):
-            result.append(s)
-        else:
-            print('{} is already present'.format(s))
+        s = random.sample(available_ids, number_of_test_patients)
+        result.append(s)
+        # we don't want the same test patient in more than one test set
+        for x in s:
+            available_ids.remove(x)
     return result
 
 patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
