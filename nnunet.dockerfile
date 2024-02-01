@@ -39,6 +39,7 @@ WORKDIR /home
 ENV nnUNet_raw=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw
 ENV nnUNet_preprocessed=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_preprocessed
 ENV nnUNet_results=/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_results
+ENV MPLCONFIGDIR=/daryl/.config/matplotlib
 
 # set up the custom trainer
 RUN ln -s /HFLung-segmentation/nnUNetTrainerDA5_100epochs.py /home/nnUNet/nnunetv2/training/nnUNetTrainer
