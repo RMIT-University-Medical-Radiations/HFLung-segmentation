@@ -23,6 +23,28 @@ def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_se
             available_ids.remove(x)
     return result
 
+def convert_to_nnunet_files(image_index, file_name):
+    # split the patient file contents into channels
+    patient_arr = np.load(file_name)
+    patient_arr = np.moveaxis(patient_arr, 1, -1)  # input shape is (5, 301, 500, 500); move the z-axis to be last
+    
+    # patient_arr contents is [exp_arr, insp_arr, pet_arr, pet_label_arr, union_mask_arr]
+    exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
+    inh_img = nib.Nifti1Image(patient_arr[1], np.eye(4))
+    label_img = nib.Nifti1Image(patient_arr[3], np.eye(4))
+    
+    case_id_str = '{}_{:04d}'.format(task_name, image_index)
+    
+    # 2-channel inputs
+    exh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 0))  # channel 0
+    inh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 1))  # channel 1
+    
+    # 1-channel labels
+    label_img.to_filename('{}/{}.nii.gz'.format(training_label_dir, case_id_str))
+
+    return case_id_str
+
+
 patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
 print(patient_test_sets)
 for test_set_idx,test_set in enumerate(patient_test_sets):
@@ -61,45 +83,13 @@ for test_set_idx,test_set in enumerate(patient_test_sets):
     print('processing training set')
     for c,f in enumerate(training_file_l):
         print(f)
-        # split the patient file contents into channels
-        patient_arr = np.load(f)
-        patient_arr = np.moveaxis(patient_arr, 1, -1)  # move the z-axis to be last
-        
-        exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
-        inh_img = nib.Nifti1Image(patient_arr[1], np.eye(4))
-        label_img = nib.Nifti1Image(patient_arr[4], np.eye(4))
-        
-        case_id_str = '{}_{:04d}'.format(task_name, c)
-        
-        # 2-channel inputs
-        exh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 0))  # channel 0
-        inh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 1))  # channel 1
-        
-        # 1-channel labels
-        label_img.to_filename('{}/{}.nii.gz'.format(training_label_dir, case_id_str))
-
+        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f)
         patient_map_d['training'].append([f,case_id_str])
 
     print('processing test set')
     for c,f in enumerate(test_file_l):
         print(f)
-        # split the patient file contents into channels
-        patient_arr = np.load(f)
-        patient_arr = np.moveaxis(patient_arr, 1, -1)  # move the z-axis to be last
-        
-        exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
-        inh_img = nib.Nifti1Image(patient_arr[1], np.eye(4))
-        label_img = nib.Nifti1Image(patient_arr[4], np.eye(4))
-        
-        case_id_str = '{}_{:04d}'.format(task_name, c)
-        
-        # 2-channel inputs
-        exh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(test_image_dir, case_id_str, 0))  # channel 0
-        inh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(test_image_dir, case_id_str, 1))  # channel 1
-        
-        # 1-channel labels
-        label_img.to_filename('{}/{}.nii.gz'.format(test_label_dir, case_id_str))
-
+        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f)
         patient_map_d['test'].append([f,case_id_str])
 
     # write the dataset file
