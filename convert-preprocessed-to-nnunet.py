@@ -26,7 +26,8 @@ def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_se
 def convert_to_nnunet_files(image_index, file_name):
     # split the patient file contents into channels
     patient_arr = np.load(file_name)
-    patient_arr = np.moveaxis(patient_arr, 1, -1)  # input shape is (5, 301, 500, 500); move the z-axis to be last
+    patient_arr = np.moveaxis(patient_arr, 2, -1)  # input shape is (n, z, y, x); move the y-axis to be last
+    patient_arr = np.moveaxis(patient_arr, 1, -1)  # want output shape to be (n, x, y, z)
     
     # patient_arr contents is [exp_arr, insp_arr, pet_arr, pet_label_arr, union_mask_arr]
     exh_img = nib.Nifti1Image(patient_arr[0], np.eye(4))  # identity matrix for transform
