@@ -23,7 +23,7 @@ def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_se
             available_ids.remove(x)
     return result
 
-def convert_to_nnunet_files(image_index, file_name):
+def convert_to_nnunet_files(image_index, file_name, image_dir, label_dir):
     # split the patient file contents into channels
     patient_arr = np.load(file_name)
     patient_arr = np.moveaxis(patient_arr, 2, -1)  # input shape is (n, z, y, x); move the y-axis to be last
@@ -37,11 +37,11 @@ def convert_to_nnunet_files(image_index, file_name):
     case_id_str = '{}_{:04d}'.format(task_name, image_index)
     
     # 2-channel inputs
-    exh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 0))  # channel 0
-    inh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(training_image_dir, case_id_str, 1))  # channel 1
+    exh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(image_dir, case_id_str, 0))  # channel 0
+    inh_img.to_filename('{}/{}_{:04d}.nii.gz'.format(image_dir, case_id_str, 1))  # channel 1
     
     # 1-channel labels
-    label_img.to_filename('{}/{}.nii.gz'.format(training_label_dir, case_id_str))
+    label_img.to_filename('{}/{}.nii.gz'.format(label_dir, case_id_str))
 
     return case_id_str
 
@@ -84,13 +84,13 @@ for test_set_idx,test_set in enumerate(patient_test_sets):
     print('processing training set')
     for c,f in enumerate(training_file_l):
         print(f)
-        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f)
+        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f, image_dir=training_image_dir, label_dir=training_label_dir)
         patient_map_d['training'].append([f,case_id_str])
 
     print('processing test set')
     for c,f in enumerate(test_file_l):
         print(f)
-        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f)
+        case_id_str = convert_to_nnunet_files(image_index=c, file_name=f, image_dir=test_image_dir, label_dir=test_label_dir)
         patient_map_d['test'].append([f,case_id_str])
 
     # write the dataset file
