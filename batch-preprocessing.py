@@ -19,7 +19,7 @@ NUMBER_OF_PATIENTS = 20
 for patient_id in range(1,NUMBER_OF_PATIENTS+1):
 
     input_nb = '{}/{}.ipynb'.format(NB_INPUT_DIR, NOTEBOOK_NAME)
-    output_nb = '{}/{} - patient id {}.ipynb'.format(NB_OUTPUT_DIR, NOTEBOOK_NAME, patient_id)
+    output_nb = '{}/{} - patient id {:02d}.ipynb'.format(NB_OUTPUT_DIR, NOTEBOOK_NAME, patient_id)
 
     print('patient id {}: \'{}\' to \'{}\''.format(patient_id, input_nb, output_nb))
     pm.execute_notebook(
