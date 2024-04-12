@@ -7,8 +7,9 @@ import random
 import json
 from nnunetv2.dataset_conversion.generate_dataset_json import generate_dataset_json
 
-preprocessed_dir = '/mnt/data/datasets/RNSH_HFlung/pre-processed-plastimatch/stack'
-nnUNet_raw='/mnt/data/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
+# directory paths assume we are running inside the nnunet container
+preprocessed_dir = '/datasets/RNSH_HFlung/pre-processed-plastimatch/stack'
+nnUNet_raw='/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
 base_task_id = 160
 task_name = "RNSH_HFlung"
 
