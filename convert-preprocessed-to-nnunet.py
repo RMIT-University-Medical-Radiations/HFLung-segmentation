@@ -12,6 +12,8 @@ nnUNet_raw='/mnt/data/datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw'
 base_task_id = 160
 task_name = "RNSH_HFlung"
 
+# return a list of test sets, each containing the patient IDs for that set
+# e.g. [[6, 9], [1, 4], [3, 20]]
 def choose_test_patients(patient_ids, number_of_test_patients, number_of_test_sets):
     result = []
     available_ids = list(patient_ids)
@@ -46,7 +48,8 @@ def convert_to_nnunet_files(image_index, file_name, image_dir, label_dir):
     return case_id_str
 
 
-patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
+# patient_test_sets = choose_test_patients(patient_ids=np.arange(1,20+1), number_of_test_patients=2, number_of_test_sets=5)
+patient_test_sets = [[4, 9], [11, 2], [14, 7]]
 print(patient_test_sets)
 for test_set_idx,test_set in enumerate(patient_test_sets):
     foldername = 'Dataset{:03d}_{}'.format(base_task_id+test_set_idx, task_name)
