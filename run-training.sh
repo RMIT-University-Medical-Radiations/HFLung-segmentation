@@ -1,8 +1,8 @@
 #!/bin/bash
 
-for training_set in {150..154}
+for training_set in {160..162}
 do
-    for config in 2d 3d_fullres 3d_lowres 3d_cascade_fullres
+    for config in 3d_fullres
     do
         for fold in {0..4}
         do
