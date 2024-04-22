@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for training_set in 160
+set -e
+
+for training_set in 161
 do
     for config in 3d_fullres
     do
@@ -13,7 +15,7 @@ do
     done
 done
 
-for training_set in {161..162}
+for training_set in 162
 do
     for config in 3d_fullres
     do
