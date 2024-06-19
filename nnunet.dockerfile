@@ -22,7 +22,9 @@ ARG PATH="/home/miniconda3/bin:${PATH}"
 WORKDIR /home
 
 # install Python
-RUN curl -O  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/miniconda3
+# RUN curl -O  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/miniconda3
+# PyTorch isn't happy with Python 3.12 yet, so we'll install 3.11
+RUN curl -O  https://repo.anaconda.com/miniconda/Miniconda3-py311_24.4.0-0-Linux-x86_64.sh && bash Miniconda3-py311_24.4.0-0-Linux-x86_64.sh -b -p /home/miniconda3
 
 # update pip
 RUN conda install pip
