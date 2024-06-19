@@ -7,6 +7,7 @@ MAINTAINER Daryl Wilding-McBride
 # install Ubuntu libraries and packages
 RUN apt-get update -y && \
 apt-get install git curl -y && \
+apt-get install build-essential -y && \
 rm -rf /var/lib/apt/lists/*
 
 # set the time zone
