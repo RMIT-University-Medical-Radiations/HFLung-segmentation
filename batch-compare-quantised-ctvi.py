@@ -22,12 +22,16 @@ for config in CONFIG_SUFFIXES:
     for dataset_id in DATASET_IDS:
         for test_id in TEST_IDS:
             input_nb = '{}/{}.ipynb'.format(NB_INPUT_DIR, NOTEBOOK_NAME)
-            output_nb = '{}{}/{} - dataset id {:02d} - test id {:02d}.ipynb'.format(NB_OUTPUT_DIR, config, NOTEBOOK_NAME, dataset_id, test_id)
+            output_nb_path = '{}{}'.format(NB_OUTPUT_DIR, config)
+            output_nb = '{}/{} - dataset id {:02d} - test id {:02d}.ipynb'.format(output_nb_path, NOTEBOOK_NAME, dataset_id, test_id)
+
+            if not os.path.exists(output_nb_path):
+                os.makedirs(output_nb_path)
 
             print('dataset id {:02d}, test id {:02d}: \'{}\''.format(dataset_id, test_id, output_nb))
             pm.execute_notebook(
                                 input_path=input_nb,
                                 output_path=output_nb,
-                                parameters=dict(dataset_id=dataset_id, test_id=test_id, MODEL_CONFIG_SUFFIX=config)
+                                parameters=dict(DATASET_ID=dataset_id, TEST_ID=test_id, MODEL_CONFIG_SUFFIX=config)
                                 )
             print('-------------\n')
