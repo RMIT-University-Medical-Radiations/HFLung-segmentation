@@ -1,12 +1,10 @@
 #!/bin/bash
 
-readonly CONFIGS_TO_CONSIDER="2d 3d_fullres 3d_lowres"
+set -e
 
-while getopts t: flag
+for training_set in {160..162}
 do
-    case "${flag}" in
-        t) training_set=${OPTARG};;
-    esac
+    echo training set: $training_set
+    nnUNetv2_find_best_configuration $training_set -tr nnUNetTrainerDA5_60epochs -p nnUNetResEncUNetPlans_48G
+    echo "-----------------------"
 done
-
-nnUNetv2_find_best_configuration $training_set -tr nnUNetTrainerDA5_60epochs -c $CONFIGS_TO_CONSIDER
