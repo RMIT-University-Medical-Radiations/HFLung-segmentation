@@ -1,12 +1,11 @@
 import papermill as pm
-import glob
 import os
 from os.path import expanduser
 import shutil
 
 NB_INPUT_DIR = '{}/repos/HFLung-segmentation'.format(expanduser('~'))
 NB_OUTPUT_DIR = '{}/papermill-output/compare-unquantised-ctvi'.format(expanduser('~'))
-NOTEBOOK_NAME = 'compare unquantised CTVI-Jac with PET'
+NOTEBOOK_NAME = 'compare unquantised CTVI with PET'
 
 # make sure the notebook output directory exists
 if os.path.exists(NB_OUTPUT_DIR):
