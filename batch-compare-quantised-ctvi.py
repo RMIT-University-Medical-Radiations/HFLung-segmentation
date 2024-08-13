@@ -5,7 +5,7 @@ import shutil
 
 NB_INPUT_DIR = '{}/repos/HFLung-segmentation'.format(expanduser('~'))
 NB_OUTPUT_DIR = '{}/papermill-output/compare-quantised-ctvi'.format(expanduser('~'))
-NOTEBOOK_NAME = 'compare nnunet predictions with quantised PET and CTVI-Jac'
+NOTEBOOK_NAME = 'compare patient nnunet predictions with quantised PET and CTVI-DIR'
 
 DATASET_IDS = [160,161,162]
 TEST_IDS = [0,1]
