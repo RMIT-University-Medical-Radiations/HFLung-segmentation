@@ -15,7 +15,7 @@ CONFIG_SUFFIXES = ['','/2d']
 
 for config in CONFIG_SUFFIXES:
     output_nb_path = '{}{}'.format(NB_OUTPUT_DIR, config.replace('/','-'))
-    
+
     # make sure the notebook output directory exists
     if os.path.exists(output_nb_path):
         shutil.rmtree(output_nb_path)
@@ -28,7 +28,7 @@ for config in CONFIG_SUFFIXES:
             mapping_file = '{}/patient-mapping-Dataset{}_RNSH_HFlung.json'.format(RAW_BASE_DIR, dataset_id)
             with open(mapping_file, 'r') as fp:
                 patient_map_d = json.load(fp)
-            patient_id = patient_map_d['test'][test_id]
+            patient_id = int(patient_map_d['test'][test_id][0].split('/')[-1].split('.')[0].split('Patient')[1])
 
             input_nb = '{}/{}.ipynb'.format(NB_INPUT_DIR, NOTEBOOK_NAME)
             output_nb = '{}/{} - set {:02d} - tid {:02d} - pid {:02d}.ipynb'.format(output_nb_path, NOTEBOOK_NAME, dataset_id, test_id, patient_id)
