@@ -1,9 +1,9 @@
 #!/bin/bash
 
-readonly source_host=daryl@krypton.eres.rmit.edu.au
-readonly source_base=/mnt/data/datasets/RNSH_HFlung/nnU-Net-processing
-readonly destination_base=/Users/E119562/Downloads/HFlung_figures
-readonly source_figures=/home/daryl/figures
+source_host='daryl@krypton.eres.rmit.edu.au'
+source_base='/mnt/data/datasets/RNSH_HFlung/nnU-Net-processing'
+destination_base=~'/Downloads/HFlung_figures'
+source_figures='~/figures'
 
 for training_set in {160..162}
 do
