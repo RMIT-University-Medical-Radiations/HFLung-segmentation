@@ -13,62 +13,65 @@ with the following subdirectories
 
 The mount points may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs.
 
+## Setup
 ### install miniconda if you don't alrady have it
 https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
 
 ### set up the new environment
-`conda create --name <name> python=3.10`
-`conda activate <name>`
+```
+conda create --name <name> python=3.10
+conda activate <name>
+```
 
 ### install the requirements
 `pip install -r requirements.txt`
 
-### image pre-processing
+## Image pre-processing
 `python ./repos/HFLung-segmentation/batch-preprocessing.py`
 
-## deformable image registration
-#### run “data pre-processing 3D plastimatch with post-DIR resampling.ipynb” for all patients:
+## Deformable image registration
+### run “data pre-processing 3D plastimatch with post-DIR resampling.ipynb” for all patients:
 `python batch-preprocessing.py`
 
-#### Plastimatch is executed in the Docker container
+### Plastimatch is executed in the Docker container
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl --entrypoint bash pypla_22.04`
 
-#### inside the container
+### inside the container
 ##### generate the vector field from DIR
 `plastimatch register /HFLung-segmentation/register-commands.txt`
 
 ##### compute the Jacobian determinant of a vector field
 `plastimatch jacobian --input dvf.mha --output-img vf_jac.mha`
 
-## compare the DIR-based methods with the PET ground truth
-#### compare each patient separately
+## Compare the DIR-based methods with the PET ground truth
+### compare each patient separately
 `python ./repos/HFLung-segmentation/batch-compare-unquantised-ctvi.py`
 
 This script will execute the `compare patient unquantised CTVI with PET.ipynb` notebook for each patient.
 
-#### consolidate the results
+### consolidate the results
 run all the cells in the `compare all unquantised CTVI with PET.ipynb` notebook
 
 ## nnU-Net training and inference
 The nnU-Net processing is done inside a Docker container, because it's the easiest way to manage CUDA installs. Model training requires a CUDA-compatible GPU with 48GB of memory. It may be possible with less memory, but this has not been tested.
 
-#### install Docker if you don't already have it
+### install Docker if you don't already have it
 https://docs.docker.com/engine/install/
 
-#### build the Docker image
+### build the Docker image
 `docker build . -t daryl/nnunet:0.6 -f ~/repos/HFLung-segmentation/nnunet.dockerfile`
 
 The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it to be meaingful in your environment.
 
-#### run the container
+### run the container
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it --gpus '"device=3"' --name='ctvi-162-2' --ipc=host -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl daryl/nnunet:0.6 /bin/bash`
 
-#### inside the container…
+### inside the container…
 
-##### convert the pre-processed images to thge format required by nnU-Net
+#### convert the pre-processed images to thge format required by nnU-Net
 `python /HFLung-segmentation/convert-preprocessed-to-nnunet.py`
 
-##### run the nnU-Net planning
+#### run the nnU-Net planning
 `. /HFLung-segmentation/run-planning.sh`
 
 ### model training
@@ -97,15 +100,15 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 `nnUNetv2_predict -d Dataset162_RNSH_HFlung -i /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw/Dataset162_RNSH_HFlung/imagesTs -o /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_predictions/Dataset162_RNSH_HFlung/best -f  0 1 2 3 4 -tr nnUNetTrainerDA5_60epochs -c 3d_fullres -p nnUNetResEncUNetPlans_48G -chk checkpoint_best.pth -device cuda`
 
 ## compare the nnU-Net results with the DIR-based methods against the PET ground truth
-#### compare each patient separately
+### compare each patient separately
 `python ./repos/batch-compare-quantised-ctvi.py`
 
 This script will execute the `compare patient nnunet predictions with quantised PET and CTVI-DIR.ipynb` notebook for each patient.
 
-#### consolidate the results
+### consolidate the results
 run all cells in the `compare all nnunet predictions with quantised PET and CTVI-DIR.ipynb` notebook
 
-#### download the figures to your local machine
+### download the figures to your local machine
 `./repos/HFLung-segmentation/download-figures.sh`
 
 
