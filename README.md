@@ -13,6 +13,8 @@ with the following subdirectories
 
 The mount points may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs.
 
+&nbsp;
+
 ## Setup
 ### install miniconda if you don't alrady have it
 https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
@@ -26,8 +28,12 @@ conda activate <name>
 ### install the requirements
 `pip install -r requirements.txt`
 
+&nbsp;
+
 ## Image pre-processing
 `python ./repos/HFLung-segmentation/batch-preprocessing.py`
+
+&nbsp;
 
 ## Deformable image registration
 ### run “data pre-processing 3D plastimatch with post-DIR resampling.ipynb” for all patients:
@@ -51,6 +57,8 @@ This script will execute the `compare patient unquantised CTVI with PET.ipynb` n
 
 ### consolidate the results
 run all the cells in the `compare all unquantised CTVI with PET.ipynb` notebook
+
+&nbsp;
 
 ## nnU-Net training and inference
 The nnU-Net processing is done inside a Docker container, because it's the easiest way to manage CUDA installs. Model training requires a CUDA-compatible GPU with 48GB of memory. It may be possible with less memory, but this has not been tested.
@@ -99,6 +107,8 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 #### or individually:
 `nnUNetv2_predict -d Dataset162_RNSH_HFlung -i /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw/Dataset162_RNSH_HFlung/imagesTs -o /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_predictions/Dataset162_RNSH_HFlung/best -f  0 1 2 3 4 -tr nnUNetTrainerDA5_60epochs -c 3d_fullres -p nnUNetResEncUNetPlans_48G -chk checkpoint_best.pth -device cuda`
 
+&nbsp;
+
 ## compare the nnU-Net results with the DIR-based methods against the PET ground truth
 ### compare each patient separately
 `python ./repos/batch-compare-quantised-ctvi.py`
@@ -111,6 +121,7 @@ run all cells in the `compare all nnunet predictions with quantised PET and CTVI
 ### download the figures to your local machine
 `./repos/HFLung-segmentation/download-figures.sh`
 
+&nbsp;
 
 ## How to cite
 If you find this pipeline useful, please cite our paper.
