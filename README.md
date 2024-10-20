@@ -39,7 +39,7 @@ conda activate <name>
 
 This script executes the `data pre-processing 3D plastimatch with post-DIR resampling.ipynb` notebook for each patient.
 
-# Deformable image registration
+# Deformable Image Registration (DIR) processing
 
 Plastimatch is executed in a Docker container using the `pypla` image.
 
@@ -56,7 +56,7 @@ https://pypi.org/project/pyplastimatch/
 *compute the Jacobian determinant of a vector field*  
 `plastimatch jacobian --input dvf.mha --output-img vf_jac.mha`
 
-# Compare the DIR-based methods with the PET ground truth
+# Compare the DIR-based CTVIs with the PET ground truth
 **compare each patient separately**  
 `python ./repos/HFLung-segmentation/batch-compare-unquantised-ctvi.py`
 
