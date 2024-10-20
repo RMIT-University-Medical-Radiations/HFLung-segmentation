@@ -5,7 +5,7 @@ This is a repository for the pipeline we developed to generate quantised ventila
 
 These instructions assume the pipeline is executed on a remote GPU compute machine running a Linux distributuon OS. We use Ubuntu 22.04.
 
-The base directory for processing (i.e. raw data, interim results, outputs) on the remote machine:
+The base directory for processing (i.e. raw data, interim results, outputs) is required:
 - `/mnt/data/datasets/RNSH_HFlung`
 
 with the following subdirectories
