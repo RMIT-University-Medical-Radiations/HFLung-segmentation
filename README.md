@@ -33,10 +33,13 @@ conda activate <name>
 This script executes the `data pre-processing 3D plastimatch with post-DIR resampling.ipynb` notebook for each patient.
 
 # Deformable image registration
-**run “data pre-processing 3D plastimatch with post-DIR resampling.ipynb” for all patients**  
-`python batch-preprocessing.py`
 
-**Plastimatch is executed in the Docker container**  
+Plastimatch is executed in a Docker container using the `pypla` image.
+
+**download the Plastimatch image**  
+https://pypi.org/project/pyplastimatch/
+
+**run the container**  
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl --entrypoint bash pypla_22.04`
 
 **inside the container**  
