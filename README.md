@@ -20,7 +20,7 @@ The Jupyter notebooks will generate the figures in a directory called `figures` 
 
 The mount points referenced throughout may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs. They are defined at the start of each script or notebook.
 
-# Setup
+# Environment setup
 **install miniconda if you don't already have it**  
 https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
 
