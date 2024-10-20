@@ -1,5 +1,5 @@
 # High-Function Lung Segmentation CTVI
-This is a repository for the pipeline we developed to generate quantised ventilation maps from breath-hold CT images using a 3D neural network based on nnU-Net. It accompanies our paper "CT Ventilation Images Produced by a 3D Neural Network Show Improvement Over the Jacobian and HU DIR-Based Methods to Predict Quantised Lung Function".
+This is a repository for the pipeline we developed to generate quantised ventilation maps from breath-hold CT images using a 3D neural network based on nnU-Net. It accompanies our paper "CT Ventilation Images Produced by a 3D Neural Network Show Improvement Over the Jacobian and HU DIR-Based Methods to Predict Quantised Lung Function". It will generate the results and figures for the paper, but is also provided as a foundation for high-function lung segmentation work on other data sets.
 
 These instructions assume the pipeline is executed on a remote GPU compute machine running a Linux distributuon OS. We use Ubuntu 22.04.
 
@@ -27,7 +27,10 @@ conda activate <name>
 `pip install -r requirements.txt`
 
 # Image pre-processing
+**prepare the raw images for processing with DIR and for nnU-Net**  
 `python ./repos/HFLung-segmentation/batch-preprocessing.py`
+
+This script executes the `data pre-processing 3D plastimatch with post-DIR resampling.ipynb` notebook for each patient.
 
 # Deformable image registration
 **run “data pre-processing 3D plastimatch with post-DIR resampling.ipynb” for all patients**  
@@ -99,7 +102,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 *or individually*  
 `nnUNetv2_predict -d Dataset162_RNSH_HFlung -i /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw/Dataset162_RNSH_HFlung/imagesTs -o /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_predictions/Dataset162_RNSH_HFlung/best -f  0 1 2 3 4 -tr nnUNetTrainerDA5_60epochs -c 3d_fullres -p nnUNetResEncUNetPlans_48G -chk checkpoint_best.pth -device cuda`
 
-# compare the nnU-Net results with the DIR-based methods against the PET ground truth
+# Compare the nnU-Net results with the DIR-based methods against the PET ground truth
 
 **compare each patient separately**  
 `python ./repos/batch-compare-quantised-ctvi.py`
