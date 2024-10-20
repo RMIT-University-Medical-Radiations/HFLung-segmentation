@@ -105,9 +105,9 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 *or individually*  
 `nnUNetv2_predict -d Dataset162_RNSH_HFlung -i /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_raw/Dataset162_RNSH_HFlung/imagesTs -o /datasets/RNSH_HFlung/nnU-Net-processing/nnUNet_predictions/Dataset162_RNSH_HFlung/best -f  0 1 2 3 4 -tr nnUNetTrainerDA5_60epochs -c 3d_fullres -p nnUNetResEncUNetPlans_48G -chk checkpoint_best.pth -device cuda`
 
-# Compare the nnU-Net results with the DIR-based methods against the PET ground truth
+# Compare the nnU-Net results and the DIR-based methods with the ground truth
 
-**compare each patient separately**  
+**compare each patient**  
 `python ./repos/batch-compare-quantised-ctvi.py`
 
 This script will execute the `compare patient nnunet predictions with quantised PET and CTVI-DIR.ipynb` notebook for each patient.
