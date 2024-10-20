@@ -33,6 +33,21 @@ conda activate <name>
 **install the requirements**  
 `pip install -r requirements.txt`
 
+# Set up the RNSH dataset from TCIA
+
+**install the NBIA data retriever**
+```
+wget https://cbiit-download.nci.nih.gov/nbia/releases/ForTCIA/NBIADataRetriever_4.4.1/nbia-data-retriever-4.4.1.deb
+sudo -S dpkg -i nbia-data-retriever-4.4.1.deb
+```
+
+**download the data**
+- go to https://nbia.cancerimagingarchive.net/nbia-search/
+- enter the collection ID: “CT-vs-PET-Ventilation-Imaging” to filter, and press the cart button
+- download the manifest file
+- open it with the NBIA data retriever
+- use descriptive directory names
+
 # Image pre-processing
 **prepare the raw images for processing with DIR and for nnU-Net**  
 `python ./repos/HFLung-segmentation/batch-preprocessing.py`
