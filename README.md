@@ -81,13 +81,21 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 
 **inside the container...**  
 
-*convert the pre-processed images to thge format required by nnU-Net*  
+*convert the pre-processed images to the format required by nnU-Net*  
 `python /HFLung-segmentation/convert-preprocessed-to-nnunet.py`
 
 *run the nnU-Net planning*  
 `. /HFLung-segmentation/run-planning.sh`
 
-**model training**  
+## Model training
+
+### Using pre-trained weights
+
+If you don't want to train the models yourself, the pre-trained weights are _here_. It's about 90 GB. To use them in the inference steps, download them and refer to the them where the inference steps mention the `results` directory.
+
+### Training the models from scratch
+
+These steps will perform five-fold cross validation on the three training sets for two model configurations (3D and 2D). Be prepared for the whole process to take about several weeks. There are no dependencies between folds or configurations, so if you have more than one GPU, a fold can be trained on a GPU in parallel, up to the number of GPUs you have available.
 
 *batch*  
 `. /HFLung-segmentation/run-training.sh`
@@ -104,7 +112,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 **finding the best configuration**  
 `nnUNetv2_find_best_configuration 160 -tr nnUNetTrainerDA5_60epochs -p nnUNetResEncUNetPlans_48G -c 2d 3d_fullres`
 
-**predict the test set**  
+## Model inference on the test set
 
 *batch*  
 `. /HFLung-segmentation/run-inference.sh`
