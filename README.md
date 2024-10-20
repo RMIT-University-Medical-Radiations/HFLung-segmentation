@@ -5,7 +5,7 @@ This is a repository for the pipeline we developed to generate quantised ventila
 
 These instructions assume the pipeline is executed on a remote GPU compute machine running a Linux distributuon OS. We use Ubuntu 22.04.
 
-The base directory for processing on the remote machine:
+The base directory for processing (i.e. raw data, interim results, outputs) on the remote machine:
 - `/mnt/data/datasets/RNSH_HFlung`
 
 with the following subdirectories
@@ -13,7 +13,12 @@ with the following subdirectories
 * `pre-processed-plastimatch` - parent directory for DIR processing
 * `nnU-Net-processing` - parent directory for nnU-Net training and inference
 
-The mount points may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs.
+The repository should be cloned to your home directory on the remote machine:  
+`git clone git@github.com:RMIT-University-Medical-Radiations/HFLung-segmentation.git`
+
+The Jupyter notebooks will generate the figures in a directory called `figures` which will be created in your home directory.
+
+The mount points referenced throughout may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs. They are defined at the start of each script or notebook.
 
 # Setup
 **install miniconda if you don't already have it**  
