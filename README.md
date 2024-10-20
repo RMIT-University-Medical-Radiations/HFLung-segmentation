@@ -14,7 +14,7 @@ with the following subdirectories
 The mount points may differ in your setup, but hopefully these instructions will help. Check the scripts for directory names and output file names to make sure they suit your needs.
 
 # Setup
-**install miniconda if you don't alrady have it**  
+**install miniconda if you don't already have it**  
 https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
 
 **set up the new environment**  
@@ -42,7 +42,7 @@ https://pypi.org/project/pyplastimatch/
 **run the container**  
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl --entrypoint bash pypla_22.04`
 
-**inside the container**  
+**inside the container...**  
 *generate the vector field from DIR*  
 `plastimatch register /HFLung-segmentation/register-commands.txt`
 
@@ -59,7 +59,7 @@ This script will execute the `compare patient unquantised CTVI with PET.ipynb` n
 run all the cells in the `compare all unquantised CTVI with PET.ipynb` notebook
 
 # nnU-Net model training and inference
-The nnU-Net processing is done inside a Docker container, because it's the easiest way to manage CUDA installs. Model training requires a CUDA-compatible GPU with 48GB of memory. It may be possible with less memory, but this has not been tested.
+The nnU-Net processing is done inside a Docker container because it's the easiest way to manage CUDA installation and dependencies. Model training requires a CUDA-compatible GPU with 48GB of memory. It is possible to train with less GPU memory, but results may vary because patch sizes will be different.
 
 **install Docker if you don't already have it**  
 https://docs.docker.com/engine/install/
@@ -72,7 +72,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 **run the container**  
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it --gpus '"device=3"' --name='ctvi-162-2' --ipc=host -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl daryl/nnunet:0.6 /bin/bash`
 
-**inside the container…**  
+**inside the container...**  
 
 *convert the pre-processed images to thge format required by nnU-Net*  
 `python /HFLung-segmentation/convert-preprocessed-to-nnunet.py`
