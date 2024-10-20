@@ -1,4 +1,4 @@
-# High-Function Lung Segmentation CTVI
+# High-Function Lung Segmentation CTVI With nnU-Net
 This is a repository for the pipeline we developed to generate quantised ventilation maps from breath-hold CT images using a 3D neural network based on nnU-Net. It accompanies our paper "CT Ventilation Images Produced by a 3D Neural Network Show Improvement Over the Jacobian and HU DIR-Based Methods to Predict Quantised Lung Function". It will generate the results and figures for the paper, but is also provided as a foundation for high-function lung segmentation work on other data sets.
 
 ![CTVI workflow diagram.](/documentation/workflow.png)
