@@ -41,7 +41,7 @@ This script executes the `data pre-processing 3D plastimatch with post-DIR resam
 
 # Deformable Image Registration (DIR) processing
 
-Plastimatch is executed in a Docker container using the `pypla` image.
+We use Plastimatch for the DIR-based methods, which is executed in a Docker container using the `pypla` image.
 
 **download the Plastimatch image**  
 https://pypi.org/project/pyplastimatch/
