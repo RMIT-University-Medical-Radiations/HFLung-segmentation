@@ -33,7 +33,7 @@ conda activate <name>
 **install the requirements**  
 `pip install -r requirements.txt`
 
-# Set up the RNSH dataset from TCIA
+# Download the RNSH dataset from TCIA
 
 **install the NBIA data retriever**
 ```
