@@ -110,7 +110,7 @@ If you don't want to train the models yourself, the pre-trained weights are _her
 
 ### Training the models from scratch
 
-These steps will perform five-fold cross validation on the three training sets for two model configurations (3D and 2D). Be prepared for the whole process to take about several weeks. There are no dependencies between folds or configurations, so if you have more than one GPU, a fold can be trained on a GPU in parallel, up to the number of GPUs you have available.
+These steps will perform five-fold cross validation on the three training sets for two model configurations (3D and 2D) on one GPU. That's 30 models in total, so be prepared for the whole process to take several weeks. There are no dependencies between training sets, folds or configurations, so if you have more than one GPU, a fold can be trained on a GPU in parallel up to the number of GPUs you have available.
 
 *batch*  
 `. /HFLung-segmentation/run-training.sh`
