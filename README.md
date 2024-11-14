@@ -89,7 +89,7 @@ https://docs.docker.com/engine/install/
 **build the Docker image**  
 `docker build . -t daryl/nnunet:0.6 -f ~/repos/HFLung-segmentation/nnunet.dockerfile`
 
-The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it to be meaingful in your environment.
+The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it to be meaningful in your environment.
 
 **run the container**  
 `docker run -u $(id -u):$(id -g) --volume="/etc/group:/etc/group:ro" --volume="/etc/passwd:/etc/passwd:ro" --volume="/etc/shadow:/etc/shadow:ro" --rm -it --gpus '"device=3"' --name='ctvi-162-2' --ipc=host -v /mnt/data/datasets:/datasets -v ./repos/HFLung-segmentation:/HFLung-segmentation -v ~:/daryl daryl/nnunet:0.6 /bin/bash`
@@ -106,7 +106,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 
 ### Using pre-trained weights
 
-If you don't want to train the models yourself, the pre-trained weights are _here_. It's about 90 GB. To use them in the inference steps, download them and refer to the them where the inference steps mention the `results` directory.
+If you don't want to train the models yourself, the pre-trained weights are _here_. It's about 90 GB. To use them in the inference steps, download and reference them where the inference steps mention the `results` directory.
 
 ### Training the models from scratch
 
