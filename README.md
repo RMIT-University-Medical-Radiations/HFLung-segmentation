@@ -149,4 +149,4 @@ run all cells in the `compare all nnunet predictions with quantised PET and CTVI
 `./repos/HFLung-segmentation/download-figures.sh`
 
 # How to cite
-If you find this pipeline useful, please cite our paper.
+If you find this repository useful, please cite our paper.
