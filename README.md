@@ -106,7 +106,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 
 ### Using pre-trained weights
 
-If you don't want to train the models yourself, the pre-trained weights are _here_. It's about 90 GB. To use them in the inference steps, download and reference them where the inference steps mention the `results` directory.
+If you don't want to train the models yourself, the pre-trained weights are [here](https://rmiteduau-my.sharepoint.com/:f:/g/personal/daryl_wilding-mcbride_rmit_edu_au/Evc31NXQ7jhHr71E056_bS8BrtdgnghigV1FnVGsDK_llA?e=W8uLTT). It's about 90 GB. To use them in the inference steps, download and reference them where the inference steps mention the `results` directory.
 
 ### Training the models from scratch
 
@@ -149,4 +149,6 @@ run all cells in the `compare all nnunet predictions with quantised PET and CTVI
 `./repos/HFLung-segmentation/download-figures.sh`
 
 # How to cite
-If you find this repository useful, please cite our paper.
+If you find this repository useful, please cite our paper:
+
+Wilding-McBride D, Lim J, Byrne H, O’Brien R. CT ventilation images produced by a 3D neural network show improvement over the Jacobian and HU DIR-based methods to predict quantized lung function. Medical Physics. 2025;52(2):889-898. doi:10.1002/mp.17532
