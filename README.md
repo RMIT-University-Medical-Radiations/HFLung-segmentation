@@ -5,10 +5,12 @@ This is a repository for the pipeline we developed to generate quantised ventila
 
 These instructions assume the pipeline is executed on a remote GPU compute machine running a Linux distributuon OS. We use Ubuntu 22.04.
 
-The base directory for processing (i.e. raw data, interim results, outputs) is required:
+A base directory is required for processing (i.e. raw data, interim results, outputs). In the code this location is:
 - `/mnt/data/datasets/RNSH_HFlung`
 
-with the following subdirectories
+You may of course change references to this directory and point them to a location that suits your environment.
+
+The base directory must have the following subdirectories:
 * `TCIA CTVI` - where the TCIA manifest was downloaded and expanded
 * `pre-processed-plastimatch` - parent directory for DIR processing
 * `nnU-Net-processing` - parent directory for nnU-Net training and inference
