@@ -108,7 +108,7 @@ The tag here (`daryl/nnunet:0.6`) is what I use; of course you should change it 
 
 ### Using pre-trained weights
 
-If you don't want to train the models yourself, the pre-trained weights are [here](https://rmiteduau-my.sharepoint.com/:f:/g/personal/daryl_wilding-mcbride_rmit_edu_au/Evc31NXQ7jhHr71E056_bS8BrtdgnghigV1FnVGsDK_llA?e=W8uLTT). It's about 90 GB. To use them in the inference steps, download and reference them where the inference steps mention the `results` directory.
+If you don't want to train the models yourself, the pre-trained weights are available. Please create an issue and I will send you a 30-day link. The compressed weights are about 90 GB for five-fold cross validated models for three training sets, as per the training set design described in the paper. To use these weights in the inference steps, download and reference them where the inference steps mention the `results` directory.
 
 ### Training the models from scratch
 
